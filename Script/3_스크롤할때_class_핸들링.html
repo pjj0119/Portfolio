@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>스크롤할때 class 핸들링</title>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="contents">
+				<div class="event_view" style="max-width: 980px;text-align: center;margin: auto;">
+					<div class="event_view_inner">	
+						
+						
+						<style>
+							*{padding: 0;margin: 0;}
+							.banner{position: relative; width: 100%; height: 100vh;border: 3px solid #000; box-sizing: border-box;border-bottom: 0;}
+							.banner:last-child{border-bottom: 3px solid #000;}
+							.banner p{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; margin: 0;}
+						</style>
+						<script>
+							document.addEventListener('scroll',()=>{
+								const wT = document.documentElement.scrollTop;//
+								const wH = window.innerHeight * 0.6 ;//window 높이값 * 0.6
+								const banner = document.querySelectorAll('.banner');//모든 배너(선택자 변경가능)
+								const num = banner.length
+
+								for(let  i = 0; i < num; i++){
+									const bannerRect = banner[i].getBoundingClientRect();
+									const bannerT = bannerRect.top ;
+									const absoluteTop  = wT + bannerT - wH ;// 절대좌표(클래스 들어오는 시점)
+									
+									if(wT > absoluteTop){
+										banner[i].classList.add('on');
+									}//else{banner[i].classList.remove('on');}//스크롤 업 할때 클래스 빼기
+								}
+								
+							});
+						</script>
+						<div class="banner01 banner">
+							<p>banner1</p>
+						</div>
+						<div class="banner02 banner">
+							<p>banner2</p>
+						</div>
+						<div class="banner03 banner">
+							<p>banner3</p>
+						</div>
+						<div class="banner04 banner">
+							<p>banner4</p>
+						</div>
+						<div class="banner05 banner">
+							<p>banner5</p>
+						</div>
+						
+							
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

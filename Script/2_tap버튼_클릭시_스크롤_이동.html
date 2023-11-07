@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>tap버튼 클릭시 스크롤 이동</title>
+</head>
+<style>
+	*{padding: 0;margin: 0;}
+	.wrap{margin-top: 80px;}
+	#header{
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+	nav{font-size: 0;}
+	#header nav a{
+		width: 25%;
+		height: 80px;
+		vertical-align: top;
+		display: inline-block;
+		vertical-align: top;
+		font-size: 25px;
+		border: 1px solid rgb(0,0,0);
+		box-sizing: border-box;
+		line-height: 80px;
+		text-align: center;
+		color:rgb(0,0,0);
+		background-color: rgb(255,255,255);
+	}
+	.tap-box{
+		width: 1200px;
+		margin: auto;
+	}
+	.tap__btn{
+		font-size:0;
+		text-align: center;
+	}
+	.tap__btn a.on{
+		background-color: rgb(0,0,0);
+		color: rgb(255,255,255);
+	}
+	.con > div{
+		width: 1200px;
+		height: 100vw;
+		font-size: 50px;
+		border: 1px solid rgb(0,0,0);
+		box-sizing: border-box;
+		line-height: 100px;
+		font-weight: 700;
+		text-align: center;
+		margin: auto;
+	}
+	
+</style>
+<script>
+	
+	function gotoScroll(gotoId){
+
+		const wT = document.documentElement.scrollTop;//
+		const headerH = document.querySelector('#header').getBoundingClientRect().height;//header 높이값
+		const tapCon = document.querySelector(gotoId);//스크롤 대상
+		const tapConRect = tapCon.getBoundingClientRect();
+		const tapConT = tapConRect.top ;
+		const absoluteTop  = wT + tapConT - headerH ;// 절대 좌표
+
+		//console.log(tapConRect)
+		window.scroll({
+			top:absoluteTop,
+			behavior: 'smooth'
+		})
+	}   
+
+</script>
+
+<body>
+	<div id="header">
+		<nav>
+			<a href="javascript:gotoScroll(`#tap1`)">Nav1</a>
+			<a href="javascript:gotoScroll('#tap2')">Nav2</a>
+			<a href="javascript:gotoScroll('#tap3')">Nav3</a>
+			<a href="javascript:gotoScroll('#tap4')">Nav4</a>
+		</nav>
+	</div>
+	<div class="wrap">
+		<div class="con">        
+			<div id="tap1">TapCon1</div>
+			<div id="tap2">TapCon2</div>
+			<div id="tap3">TapCon3</div>
+			<div id="tap4">TapCon4</div>
+		</div>
+	</div>
+</body>
+</html>
