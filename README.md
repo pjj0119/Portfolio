@@ -3,4 +3,4 @@
 
 ## 목차
 > [1. React](React)<br/>
-> [2. Java Script](Java-Script)
+> [2. Java Script](Java Script)
