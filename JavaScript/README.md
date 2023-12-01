@@ -165,6 +165,7 @@
 
 > 코드
 ```html
+	<!-- html -->
 	<div class="last-game">
 		<audio src="src/bgm.m4a" loop autoplay controls></audio>
 		<div class="bg-box">
@@ -192,6 +193,7 @@
 	</div>
 ```
 ``` css
+	/*Css*/
 	*{margin: 0;padding: 0;}
 	.bg-box{
 		position: fixed;
@@ -316,93 +318,93 @@
 ```
 
 ``` javascript
+	//Vanilla JS
 	window.onload = () => {
-			//Vanilla JS
-			// 첫번째 챕터 > 첫 화면 검은 배경 닫히는 효과
-			const bgBlackAll = document.querySelectorAll('.black'); //black 배경
-			bgBlackAll.forEach(bgBlack => {
-				bgBlack.classList.remove('left');
-				bgBlack.classList.remove('right');
-			});
+		// 첫번째 챕터 > 첫 화면 검은 배경 닫히는 효과
+		const bgBlackAll = document.querySelectorAll('.black'); //black 배경
+		bgBlackAll.forEach(bgBlack => {
+			bgBlack.classList.remove('left');
+			bgBlack.classList.remove('right');
+		});
 
-			// 두번재 챕터 > 로고 출력 로고 클릭 시 이벤트
-			const logo = document.querySelector('.logo')// logo
-			const wtBkBgAll = document.querySelectorAll('.center')// 흰색,검은색 배경
-			const bCard = document.querySelector('.result');
-			//fade In 효과
-			logo.style.display = 0;
-			logo.style.transition = 'opacity 1s';
+		// 두번재 챕터 > 로고 출력 로고 클릭 시 이벤트
+		const logo = document.querySelector('.logo')// logo
+		const wtBkBgAll = document.querySelectorAll('.center')// 흰색,검은색 배경
+		const bCard = document.querySelector('.result');
+		//fade In 효과
+		logo.style.display = 0;
+		logo.style.transition = 'opacity 1s';
+		setTimeout(function(){
+			logo.style.opacity = 1;
+		},1500);
+		logo.addEventListener('click', () => {
+			logo.style.opacity = 0;
 			setTimeout(function(){
-				logo.style.opacity = 1;
-			},1500);
-			logo.addEventListener('click', () => {
-				logo.style.opacity = 0;
-				setTimeout(function(){
-					logo.style.display ='none'; //logo 삭제
-					for(const wtBkBg of wtBkBgAll){
-						wtBkBg.classList.add('on');	// 흰색,검은색 배경 출력
-					}
-					bCard.classList.add('on')
-				},1000);
-				setTimeout(function(){
-					bCard.classList.add('updown');
-				},3500);
-			});
+				logo.style.display ='none'; //logo 삭제
+				for(const wtBkBg of wtBkBgAll){
+					wtBkBg.classList.add('on');	// 흰색,검은색 배경 출력
+				}
+				bCard.classList.add('on')
+			},1000);
+			setTimeout(function(){
+				bCard.classList.add('updown');
+			},3500);
+		});
 
-			//세번째 챕터 > 명함 클릭 시 이벤트
-			const bCardFront = document.querySelector('.front');// 명함 앞면
-			const bCardBack = document.querySelector('.back');// 명함 뒷면
-			const resultList = document.querySelectorAll('.result__con li'); // 전체 결과 값
-			const max = resultList.length; // 결과 값 갯수
+		//세번째 챕터 > 명함 클릭 시 이벤트
+		const bCardFront = document.querySelector('.front');// 명함 앞면
+		const bCardBack = document.querySelector('.back');// 명함 뒷면
+		const resultList = document.querySelectorAll('.result__con li'); // 전체 결과 값
+		const max = resultList.length; // 결과 값 갯수
 
-			bCard.addEventListener('click',function handleClick(){
-				let num = Math.floor(Math.random() * (max)); // 랜덤 돌리기
+		bCard.addEventListener('click',function handleClick(){
+			let num = Math.floor(Math.random() * (max)); // 랜덤 돌리기
 
-				this.classList.add('rotate');
-				bCard.classList.remove('updown');
-				bCardFront.classList.remove('on');
-				bCardBack.classList.add('on');
-				resultList[num].classList.add('on');
-				bCard.removeEventListener('click', handleClick); // 카드 돌리기 끝
-			});
-		}
+			this.classList.add('rotate');
+			bCard.classList.remove('updown');
+			bCardFront.classList.remove('on');
+			bCardBack.classList.add('on');
+			resultList[num].classList.add('on');
+			bCard.removeEventListener('click', handleClick); // 카드 돌리기 끝
+		});
+	}
 
-		//jQuery	
-		//$(function(){
-			//$('.bg-box > div.black').removeClass(['left','right']);
-			// 타이틀
-			// setTimeout(function(){
-			// 	$('.bg-box > div.logo').fadeIn(1000);
-			// },1500);
+	//jQuery	
+	//$(function(){
+		//$('.bg-box > div.black').removeClass(['left','right']);
+		// 타이틀
+		// setTimeout(function(){
+		// 	$('.bg-box > div.logo').fadeIn(1000);
+		// },1500);
+		
+		// 타이틀 클릭 시
+		// $('.bg-box > div.logo').on('click',function(){
+		// 	$(this).fadeOut(1000); //타이틀 삭제
+		// 	setTimeout(function(){
+		// 		$('.bg-box > div.center').addClass('on');// 흰색,검은색 배경 노출
+		// 		$('.result-box > div.result').addClass('on');// 명함 노출
+		// 	},1000);				
+		// 	setTimeout(function(){
+		// 		$('.result-box > div.result').addClass('updown');//명함 업다운 효과
+		// 	},3500);
+		// 	$('.bg-box > div.logo').off();
+		// });
+		// 명함 클릭 시
+		// $('.result-box > div.result').on('click',function(){
+		// 	$(this).addClass('rotate');
+		// 	$('.result-box > div.result').removeClass('updown');
+		// 	$('.result-box > div.result .font').removeClass('on');
+		// 	$('.result-box > div.result .back').addClass('on');
 			
-			// 타이틀 클릭 시
-			// $('.bg-box > div.logo').on('click',function(){
-			// 	$(this).fadeOut(1000); //타이틀 삭제
-			// 	setTimeout(function(){
-			// 		$('.bg-box > div.center').addClass('on');// 흰색,검은색 배경 노출
-			// 		$('.result-box > div.result').addClass('on');// 명함 노출
-			// 	},1000);				
-			// 	setTimeout(function(){
-			// 		$('.result-box > div.result').addClass('updown');//명함 업다운 효과
-			// 	},3500);
-			// 	$('.bg-box > div.logo').off();
-			// });
-			// 명함 클릭 시
-			// $('.result-box > div.result').on('click',function(){
-			// 	$(this).addClass('rotate');
-			// 	$('.result-box > div.result').removeClass('updown');
-			// 	$('.result-box > div.result .font').removeClass('on');
-			// 	$('.result-box > div.result .back').addClass('on');
-				
-			// 	var max = $('.result__con li').length;
-			// 	 var num = Math.floor(Math.random() * (max)) + 1;
-			// 	$('.result__con li:nth-child('+ num +')').addClass('on')
-			// 	$('.result-box > div.result').off();
-				
-			// });
-			 
+		// 	var max = $('.result__con li').length;
+		// 	 var num = Math.floor(Math.random() * (max)) + 1;
+		// 	$('.result__con li:nth-child('+ num +')').addClass('on')
+		// 	$('.result-box > div.result').off();
+			
+		// });
+			
 
-		//});
+	//});
 
 ```
 <br/>
